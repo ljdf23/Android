@@ -20,6 +20,7 @@ public class QuizActivity extends AppCompatActivity {
             new Question(R.string.question_americas, true),
             new Question(R.string.question_asia,true),
     };
+
     private int mCurrentIndex = 0;
 
     private void updateQuestion()
@@ -27,6 +28,7 @@ public class QuizActivity extends AppCompatActivity {
         final int question = mQuestionBank[mCurrentIndex].getTextResId();
         mQuestionTextView.setText(question);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +39,6 @@ public class QuizActivity extends AppCompatActivity {
         mFalseButton = (Button) findViewById(R.id.false_button);
         mNextButton = (Button) findViewById(R.id.next_button);
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
-
 
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +62,6 @@ public class QuizActivity extends AppCompatActivity {
         });
 
         updateQuestion();
-
     }
 
     private void checkAnswer(boolean userPressedTrue)
