@@ -2,6 +2,7 @@ package com.bignerdranch.android.geoquiz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ public class QuizActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
     private static final int REQUEST_CODE_CHEAT = 0;
     private boolean mIsCheater;
+
 
     private Question[] mQuestionBank = new Question[]{
             new Question(R.string.question_oceans, true),
@@ -53,8 +55,17 @@ public class QuizActivity extends AppCompatActivity {
             }
 
             mIsCheater = CheatActivity.wasAnswerShown(data);
+            mQuestionBank[mCurrentIndex].setCheat(mIsCheater);
         }
+    }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            mIsCheater = false;
+        }
     }
 
     @Override
@@ -63,6 +74,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
         setTitle(R.string.app_name);
+
 
         if (savedInstanceState != null)
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
@@ -165,7 +177,7 @@ public class QuizActivity extends AppCompatActivity {
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
         int messageResId = 0;
-        if (mIsCheater) {
+        if (mIsCheater || mQuestionBank[mCurrentIndex].isCheat()) {
             messageResId = R.string.judgment_toast;
         } else {
             if (userPressedTrue == answerIsTrue) {
@@ -175,6 +187,6 @@ public class QuizActivity extends AppCompatActivity {
             }
         }
 
-        Toast.makeText(this, messageResId, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
     }
 }

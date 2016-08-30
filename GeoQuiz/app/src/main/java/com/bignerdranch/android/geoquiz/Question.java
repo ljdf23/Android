@@ -6,19 +6,19 @@ package com.bignerdranch.android.geoquiz;
 public class Question {
     private int mTextResId;
     private boolean mAnswerTrue;
+    private boolean mIsCheat;
 
+    public boolean isCheat() { return mIsCheat; }
+    public void setCheat(boolean cheat) { mIsCheat = cheat; }
     public int getTextResId() {
         return mTextResId;
     }
-
     public boolean isAnswerTrue() {
         return mAnswerTrue;
     }
-
     public void setAnswerTrue(boolean answerTrue) {
         mAnswerTrue = answerTrue;
     }
-
     public void setTextResId(int textResId) {
         mTextResId = textResId;
     }
@@ -27,5 +27,6 @@ public class Question {
     {
         mTextResId = textResId;
         mAnswerTrue = answerTrue;
+        mIsCheat = false;
     }
 }
