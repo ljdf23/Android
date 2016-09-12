@@ -23,7 +23,6 @@ public class Crime {
 
     private String mTitle;
 
-
     public Crime()
     {
         //Generate unique identifier
