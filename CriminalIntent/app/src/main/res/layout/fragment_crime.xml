@@ -22,15 +22,32 @@
                 style="?android:listSeparatorTextViewStyle"/>
 
 
-        <Button android:id="@+id/crime_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                tools:text="Esto es una "
-                android:padding="12dp"
-                android:layout_margin="1dp"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
 
+                <Button android:id="@+id/crime_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        tools:text="Fecha"
+                        android:padding="12dp"
+                        android:layout_margin="1dp"
+                        android:layout_weight="50"/>
+
+                <Button android:id="@+id/crime_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        tools:text="Hora"
+                        android:padding="12dp"
+                        android:layout_margin="1dp"
+                        android:layout_weight="50"/>
+        </LinearLayout>
 
         <CheckBox android:layout_width="match_parent"
                 android:layout_height="wrap_content"
