@@ -9,6 +9,7 @@ import java.util.UUID;
  * Created by schizophrenia on 30/08/16.
  *
  */
+
 public class Crime {
     private UUID mId;
     private String mTitle;
@@ -29,7 +30,6 @@ public class Crime {
     }
     public Date getDate()
     {
-
         return mDate;
     }
     public boolean isSolved()

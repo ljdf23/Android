@@ -9,7 +9,9 @@ import java.util.UUID;
 /**
  * Created by Luis on 12/09/2016.
  */
+
 public class CrimeLab {
+
     private static CrimeLab sCrimeLab;
     private List<Crime> mCrimes;
 
@@ -24,7 +26,7 @@ public class CrimeLab {
     private CrimeLab(Context context)
     {
         mCrimes = new ArrayList<>();
-        for (int i=0; i <100; i++)
+        for (int i=0; i <20; i++)
         {
             Crime crime = new Crime();
             crime.setmTitle("Crime #" + i);
@@ -40,7 +42,7 @@ public class CrimeLab {
 
     public Crime getCrime(UUID id)
     {
-        for (Crime crime : mCrimes){
+        for (Crime crime : mCrimes) {
             if(crime.getmId().equals(id))
             {
                 return crime;
