@@ -10,5 +10,17 @@
     <string name="crime_solved_label">Solved</string>
     <string name="date_picker_title">Date of crime:</string>
     <string name="time_picker_title">Hour of crime:</string>
+    <string name="new_crime">New Crime</string>
+    <string name="show_subtitle">Show Subtitle</string>
+    <string name="hide_subtitle">Hide Subtitle</string>
+    <string name="subtitle_format">%1$s crimes</string>
+    <string name="delete_crime">Delete Crime</string>
+    <string name="message_no_items">There are no crimes</string>
+    <string name="btn_new_item">+</string>
+
+    <plurals name="subtitle_plural">
+        <item quantity="one">%1$s crime</item>
+        <item quantity="other">%1$s crimes</item>
+    </plurals>
 
 </resources>

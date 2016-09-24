@@ -1,19 +1,23 @@
 package com.bignerdranch.android.criminalintent;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/**
+/*
  * Created by Luis on 12/09/2016.
+ *
  */
 
 public class CrimeLab {
 
     private static CrimeLab sCrimeLab;
     private List<Crime> mCrimes;
+    private Context mContext;
+    private SQLiteDatabase mDatabase;
 
     public static CrimeLab get(Context context)
     {
@@ -25,8 +29,11 @@ public class CrimeLab {
 
     private CrimeLab(Context context)
     {
+        mContext = context.getApplicationContext();
+        mDatabase = new CrimeBaseHelper(mContext).getWritableDatabase();
+
         mCrimes = new ArrayList<>();
-        for (int i=0; i <20; i++)
+        for (int i=0; i <1; i++)
         {
             Crime crime = new Crime();
             crime.setmTitle("Crime #" + i);
@@ -50,4 +57,15 @@ public class CrimeLab {
         }
         return null;
     }
+
+    public void addCrime(Crime c)
+    {
+        mCrimes.add(c);
+    }
+
+    public void deleteCrime(Crime c)
+    {
+        mCrimes.remove(c);
+    }
+
 }

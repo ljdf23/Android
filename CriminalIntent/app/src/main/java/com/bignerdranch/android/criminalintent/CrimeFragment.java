@@ -11,6 +11,9 @@ import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -41,8 +44,21 @@ public class CrimeFragment extends Fragment {
     private static final String DIALOG_TIME = "DialogTime";
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_TIME = 1;
+    private static final String ACTION_DELETE = "DeleteAction";
 
-    public static CrimeFragment newInstance(UUID crimeId) {
+    public static boolean wasaDeleteAction(Intent result) {
+        return result.getBooleanExtra(ACTION_DELETE, false);
+    }
+
+    private void setDeleteAction()
+    {
+        Intent data = new Intent();
+        data.putExtra(ACTION_DELETE, true);
+        getActivity().setResult(Activity.RESULT_OK, data);
+    }
+
+    public static CrimeFragment newInstance(UUID crimeId)
+    {
         Bundle args = new Bundle();
         args.putSerializable(ARG_CRIME_ID, crimeId);
 
@@ -53,10 +69,11 @@ public class CrimeFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-         if(resultCode != Activity.RESULT_OK)
-         {
-             return;
-         }
+
+        if(resultCode != Activity.RESULT_OK)
+        {
+            return;
+        }
 
         if(requestCode == REQUEST_DATE)
         {
@@ -78,6 +95,24 @@ public class CrimeFragment extends Fragment {
         //getarguments get the arguments and get the bundle//
         UUID crimeId =  (UUID) getArguments().getSerializable(ARG_CRIME_ID);
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
+
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId())
+        {
+            case R.id.menu_item_delete_crime:
+                CrimeLab.get(getActivity()).deleteCrime(mCrime);
+                //getActivity().setResult(REQUEST_DELETE);
+                setDeleteAction();
+                getActivity().finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Nullable
@@ -103,12 +138,19 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
+                //1
                 //DatePickerFragment dialog = new DatePickerFragment();
 
-                DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
+                //2 call a fragment directly
+                //DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
                 //Call between fragment, we have to set the target fragment who receive the data, after this fragment die.
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
-                dialog.show(manager, DIALOG_DATE);
+                //dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+                //dialog.show(manager, DIALOG_DATE);
+
+                //3 call an activity with embedded fragment
+                Intent intent = DatePickerActivity.newIntent(getActivity(),mCrime.getDate());
+                startActivityForResult(intent, REQUEST_DATE);
+
             }
         });
 
@@ -148,6 +190,15 @@ public class CrimeFragment extends Fragment {
         });
 
         return v;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        inflater.inflate(R.menu.fragment_crime, menu);
+
+
     }
 
     private void updateTime() {

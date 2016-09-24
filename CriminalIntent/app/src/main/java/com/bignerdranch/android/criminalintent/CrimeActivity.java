@@ -14,7 +14,8 @@ public class CrimeActivity extends SingleFragmentActivity {
     private static final String EXTRA_CRIME_ID = "com.bignerdranch.android.criminialintent.crime_id";
     private UUID mCrimeId;
     @Override
-    protected Fragment createFragment() {
+    protected Fragment createFragment()
+    {
         UUID crimeId = (UUID) getIntent().getSerializableExtra(EXTRA_CRIME_ID);
         return CrimeFragment.newInstance(crimeId);
     }

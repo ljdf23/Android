@@ -75,7 +75,6 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
         setTitle(R.string.app_name);
 
-
         if (savedInstanceState != null)
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
 
