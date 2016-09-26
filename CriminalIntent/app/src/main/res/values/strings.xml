@@ -22,5 +22,14 @@
         <item quantity="one">%1$s crime</item>
         <item quantity="other">%1$s crimes</item>
     </plurals>
+    <string name="crime_suspect_text">Choose suspect</string>
+    <string name="crime_report_text">Send Crime Report</string>
+    <string name="crime_report">%1s! The crime was discovered on %2s. %3s, and %4s</string>
+    <string name="crime_report_solved">The case is solved</string>
+    <string name="crime_report_unsolved">The case is not solved</string>
+    <string name="crime_report_no_suspect">there is no suspect</string>
+    <string name="crime_report_suspect">the suspect is %s</string>
+    <string name="crime_report_subject">Criminal Crime Report</string>
+    <string name="send_report">Send crime report via</string>
 
 </resources>

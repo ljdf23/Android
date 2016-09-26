@@ -202,10 +202,7 @@ public class CrimeFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-
         inflater.inflate(R.menu.fragment_crime, menu);
-
-
     }
 
     private void updateTime() {
@@ -220,5 +217,30 @@ public class CrimeFragment extends Fragment {
 
     public void returnResult() {
         getActivity().setResult(Activity.RESULT_OK, null);
+    }
+
+    private String getCrimeReport()
+    {
+        String solvedString = null;
+        if(mCrime.isSolved()){
+            solvedString = getString(R.string.crime_report_solved);
+        }
+        else  {
+            solvedString = getString(R.string.crime_report_unsolved);
+        }
+
+        String dateFormat = "EEE, MMM dd";
+        String dateString = DateFormat.format(dateFormat, mCrime.getDate()).toString();
+
+        String suspect = mCrime.getSuspect();
+        if(suspect == null) {
+            suspect = getString(R.string.crime_report_no_suspect);
+        }
+        else {
+            suspect = getString(R.string.crime_report_suspect);
+        }
+
+        String report = getString(R.string.crime_report,mCrime.getmTitle(), dateString, solvedString, suspect);
+        return report;
     }
 }
