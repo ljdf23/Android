@@ -169,18 +169,17 @@ public class CrimeListFragment extends Fragment {
         }
         else
         {
+            mAdapter.setCrimes(crimes);
             if(lastItemClick == NO_ELEMENT)
                 mAdapter.notifyDataSetChanged();
             else
                 mAdapter.notifyItemChanged(lastItemClick);
         }
 
-        if(crimes.size() == 0)
-        {
+        if(crimes.size() == 0) {
             message_no_items.setVisibility(View.VISIBLE);
         }
-        else
-        {
+        else {
             message_no_items.setVisibility(View.GONE);
         }
 
@@ -243,6 +242,11 @@ public class CrimeListFragment extends Fragment {
             Crime crime = mCrimes.get(position);
             holder.bindCrime(crime);
             //holder.mTitleTextView.setText(crime.getmTitle());
+        }
+
+        public void setCrimes(List<Crime> crimes)
+        {
+            mCrimes = crimes;
         }
 
         @Override

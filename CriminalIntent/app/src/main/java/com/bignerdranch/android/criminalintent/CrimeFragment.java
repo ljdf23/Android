@@ -47,7 +47,7 @@ public class CrimeFragment extends Fragment {
     private static final String ACTION_DELETE = "DeleteAction";
 
     public static boolean wasaDeleteAction(Intent result) {
-        return result.getBooleanExtra(ACTION_DELETE, false);
+        return result != null && result.getBooleanExtra(ACTION_DELETE, false);
     }
 
     private void setDeleteAction()
@@ -97,6 +97,13 @@ public class CrimeFragment extends Fragment {
         mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
 
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        CrimeLab.get(getActivity()).updateCrime(mCrime);
     }
 
     @Override
